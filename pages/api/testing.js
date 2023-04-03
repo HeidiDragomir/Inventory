@@ -85,55 +85,56 @@ export default async function handler(req, res) {
 		// add all products by productNumber to "01001" products array
 		subsubcategoryObj.products.push(productObj);
 	}
+	console.log("groupedProducts", groupedProducts);
 
 	// THE PROBLEM IS HERE IN THIS PART
 	// Write each category to its own file
-	let categoriesData = {};
+	// let categoriesData = {};
 
-	for (let category in groupedProducts) {
-		const categoryName = getCategoryName(category, categories);
-		const categoryData = {
-			id: category,
-			categoryName: categoryName,
-			items: groupedProducts[category].items,
-		};
+	// for (let category in groupedProducts) {
+	// 	const categoryName = getCategoryName(category, categories);
+	// 	const categoryData = {
+	// 		id: category,
+	// 		categoryName: categoryName,
+	// 		items: groupedProducts[category].items,
+	// 	};
 
-		for (let subcategory of categoryData.items) {
-			const subcategoryName = getCategoryName(subcategory.id, categories);
-			const subcategoryData = {
-				id: subcategory.id,
-				categoryName: subcategoryName,
-				items: subcategory.items,
-			};
+	// 	for (let subcategory of categoryData.items) {
+	// 		const subcategoryName = getCategoryName(subcategory.id, categories);
+	// 		const subcategoryData = {
+	// 			id: subcategory.id,
+	// 			categoryName: subcategoryName,
+	// 			items: subcategory.items,
+	// 		};
 
-			for (let subsubCategory of subcategoryData.items) {
-				const subsubCategoryName = getCategoryName(
-					subsubCategory.id,
-					categories
-				);
-				const subsubCategoryData = {
-					id: subsubCategory.id,
-					categoryName: subsubCategoryName,
-					products: subsubCategory.products,
-				};
-				// console.log("subsubCategoryData", subsubCategoryData)
-			}
+	// 		for (let subsubCategory of subcategoryData.items) {
+	// 			const subsubCategoryName = getCategoryName(
+	// 				subsubCategory.id,
+	// 				categories
+	// 			);
+	// 			const subsubCategoryData = {
+	// 				id: subsubCategory.id,
+	// 				categoryName: subsubCategoryName,
+	// 				products: subsubCategory.products,
+	// 			};
+	// 			// console.log("subsubCategoryData", subsubCategoryData)
+	// 		}
 
-			// console.log("subcategoryData.items", subcategoryData)
-		}
-		console.log("categoryData.items", categoryData);
+	// 		// console.log("subcategoryData.items", subcategoryData)
+	// 	}
+	// 	console.log("categoryData.items", categoryData);
 
-		const filename = `./inventory/json/${categoryName}.json`;
-		const fileData = JSON.stringify(categoriesData[categoryName]);
+	// 	const filename = `./inventory/json/${categoryName}.json`;
+	// 	const fileData = JSON.stringify(categoriesData[categoryName]);
 
-		fs.writeFile(filename, fileData, (err) => {
-			if (err) {
-				console.error(err);
-				return;
-			}
-			console.log(`File ${filename} created`);
-		});
-	}
+	// 	fs.writeFile(filename, fileData, (err) => {
+	// 		if (err) {
+	// 			console.error(err);
+	// 			return;
+	// 		}
+	// 		console.log(`File ${filename} created`);
+	// 	});
+	// }
 
 	res.send("Files created");
 }
