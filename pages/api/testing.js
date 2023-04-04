@@ -25,11 +25,12 @@ export default async function handler(req, res) {
 		if (!groupedProducts[category]) {
 			groupedProducts[category] = {
 				id: category,
-				categoryName: "",
+				categoryName: getCategoryName(category, categories),
 				items: [],
 			};
 		}
 		// result --> { id: '21', categoryName: '', items: [] }
+		// console.log("groupedProducts", groupedProducts[category]);
 
 		// Step 2: --> find all products after subcategory
 		// "010" -- groupedProducts[category].items
@@ -40,12 +41,13 @@ export default async function handler(req, res) {
 		if (!subcategoryObj) {
 			subcategoryObj = {
 				id: subcategory,
-				categoryName: "",
+				categoryName: getCategoryName(subcategory, categories),
 				items: [],
 			};
 		}
 
 		// result --> { id: '010', categoryName: '', items: [] }
+		// console.log("groupedProducts[category].items", groupedProducts[category].items);
 
 		// add all products by subcategory to "01" products array
 		groupedProducts[category].items.push(subcategoryObj);
@@ -59,12 +61,13 @@ export default async function handler(req, res) {
 		if (!subsubcategoryObj) {
 			subsubcategoryObj = {
 				id: subsubcategory,
-				categoryName: "",
+				categoryName: getCategoryName(subsubcategory, categories),
 				products: [],
 			};
 		}
 
 		// result --> { id: '01001', categoryName: '', products: [] }
+		// console.log("subcategoryObj.items", subcategoryObj.items)
 
 		// add all products by subsubcategory to "010" items array
 		subcategoryObj.items.push(subsubcategoryObj);
@@ -85,7 +88,19 @@ export default async function handler(req, res) {
 		// add all products by productNumber to "01001" products array
 		subsubcategoryObj.products.push(productObj);
 	}
-	console.log("groupedProducts", groupedProducts);
+	// console.log("groupedProducts", groupedProducts);
+
+	for (let category in groupedProducts) {
+		const filename = `./inventory/json/${category}.json`;
+		const fileData = JSON.stringify(groupedProducts);
+		fs.writeFile(filename, fileData, (err) => {
+			if (err) {
+				console.error(err);
+				return;
+			}
+			console.log(`File ${filename} created`);
+		});
+	}
 
 	// THE PROBLEM IS HERE IN THIS PART
 	// Write each category to its own file

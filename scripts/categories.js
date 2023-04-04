@@ -11,7 +11,7 @@ export async function getCategories() {
 		for (let row of data.split("\n")) {
 			const rowItems = row.split(/\s+(.*)/);
 			categories.push({
-				category: rowItems[0],
+				categoryId: rowItems[0],
 				categoryName: rowItems[1].replace(/;/g, ""),
 			});
 		}
