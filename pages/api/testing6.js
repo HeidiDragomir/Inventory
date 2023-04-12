@@ -40,15 +40,15 @@ export default async function handler(req, res) {
 	// let groupedProducts = process();
 	// console.log(groupedProducts);
 
-	// const filename = `./inventory/json/${categoryName}.json`;
+	const filename = `./inventory/json/01.json`;
 
-	// fs.writeFile(filename, JSON.stringify(items("01", 2)), (err) => {
-	// 	if (err) {
-	// 		console.error(err);
-	// 		return;
-	// 	}
-	// 	console.log(`File ${filename} created`);
-	// });
+	fs.writeFile(filename, JSON.stringify(items("01", 2)), (err) => {
+		if (err) {
+			console.error(err);
+			return;
+		}
+		console.log(`File ${filename} created`);
+	});
 
 	res.send("Files created");
 }

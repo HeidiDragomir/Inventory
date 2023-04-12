@@ -9,7 +9,7 @@
     ```bash
     npm run dev
     ```
-- For now you can open [http://localhost:3000/api/categories](http://localhost:3000/api/categories) with your browser to see the result.
+- For now you can open [http://localhost:3000/api/testing6](http://localhost:3000/api/testing6) with your browser to see the result.
 
 ## Info:
 
