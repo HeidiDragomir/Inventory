@@ -5,6 +5,7 @@ import { getProducts } from "../../scripts/products";
 export default async function handler(req, res) {
 	const categories = await getCategories();
 	const products = await getProducts();
+	console.log(products)
 	let foundProducts = [];
 	let mainCategory;
 	let secondCategory;
@@ -43,15 +44,15 @@ export default async function handler(req, res) {
 			
 		}
 		// 3) Create a json file and save all found products in it
-		const filename = `./inventory/json/${category.categoryName}.json`;
-		fs.writeFile(filename, JSON.stringify(foundProducts), (err) => {
-			if (err) {
-				console.error(err);
-				return;
-			}
-			console.log(`File ${filename} created`);
-		});
-		break;
+		// const filename = `./inventory/json/${category.categoryName}.json`;
+		// fs.writeFile(filename, JSON.stringify(foundProducts), (err) => {
+		// 	if (err) {
+		// 		console.error(err);
+		// 		return;
+		// 	}
+		// 	console.log(`File ${filename} created`);
+		// });
+		// break;
 
 		// 4) Then continue with the next category
 	}

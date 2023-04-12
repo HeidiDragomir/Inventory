@@ -5,6 +5,8 @@ import { getProducts } from "../../scripts/products";
 export default async function handler(req, res) {
 	const allCategories = await getCategories();
 	const products = await getProducts();
+    console.log("categories", allCategories)
+    console.log("products", products)
 	let foundProducts = [];
     const categories = Object.keys(allCategories)
 
@@ -14,7 +16,7 @@ export default async function handler(req, res) {
     // })
 	// 1) Loop over categories and take one category
 	for (let category of categories) {
-        console.log(allCategories[category])
+        // console.log(allCategories[category])
 
 		// 1.bis) Group products only in the main category
 

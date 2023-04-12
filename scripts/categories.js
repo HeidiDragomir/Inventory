@@ -12,7 +12,8 @@ export async function getCategories() {
 			const rowItems = row.split(/\s+(.*)/);
 			categories.push({
 				categoryId: rowItems[0],
-				categoryName: rowItems[1].replace(/;/g, ""),
+				// categoryName: rowItems[1].replace(/;/g, ""),
+				categoryName: rowItems[1].split(/;/)[0]
 			});
 		}
 		return categories;
